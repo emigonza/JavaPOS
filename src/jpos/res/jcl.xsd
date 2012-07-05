@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<!--
+            targetNamespace="http://www.javapos.com/2002/jcl">
+		    xmlns="http://www.javapos.com/2002/jcl">
+-->		    
+    
+    <!-- Root JposEntries xsd:element definition -->
+    <xsd:complexType name="JposEntriesType">
+	    <xsd:sequence>
+                <xsd:element name="JposEntry" type="JposEntryType" minOccurs="0" maxOccurs="unbounded"/>
+    	</xsd:sequence>       
+    </xsd:complexType>
+    
+    <xsd:element name="JposEntries" type="JposEntriesType"/>
+    
+    <!-- All other xsd:complexType definitions -->
+    <xsd:complexType name="JposEntryType">
+        <xsd:sequence>
+            <xsd:element name="creation" type="CreationType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="vendor" type="VendorType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="jpos" type="JposType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="product" type="ProductType" minOccurs="1" maxOccurs="1"/>
+            <xsd:element name="prop" type="PropType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="logicalName" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CreationType">
+        <xsd:attribute name="factoryClass" type="xsd:string" use="required"/>
+        <xsd:attribute name="serviceClass" type="xsd:string" use="required"/>
+    </xsd:complexType>
+    
+    <xsd:complexType name="VendorType">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="url" type="xsd:anyURI" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="JposType">
+        <xsd:attribute name="category" type="JposDevCatType" use="required"/>
+        <xsd:attribute name="version" type="VersionType" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="ProductType">
+        <xsd:attribute name="description" type="xsd:string" use="required"/>
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="url" type="xsd:anyURI" use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="PropType">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+        <xsd:attribute name="value" type="xsd:string" use="required"/>
+        <xsd:attribute name="type" type="PropTypeType" use="optional"/>
+    </xsd:complexType>
+                
+    <!-- All xsd:simpleType definitions -->        
+    <xsd:simpleType name="JposDevCatType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BumpBar"/>
+            <xsd:enumeration value="CashChanger"/>
+            <xsd:enumeration value="CashDrawer"/>
+            <xsd:enumeration value="CheckScanner"/>
+            <xsd:enumeration value="CAT"/>
+            <xsd:enumeration value="CoinDispenser"/>
+            <xsd:enumeration value="FiscalPrinter"/>
+            <xsd:enumeration value="HardTotals"/>            
+            <xsd:enumeration value="Keylock"/>
+            <xsd:enumeration value="LineDisplay"/>
+            <xsd:enumeration value="MICR"/>
+            <xsd:enumeration value="MotionSensor"/>                        
+            <xsd:enumeration value="MSR"/>
+            <xsd:enumeration value="PINPad"/>
+            <xsd:enumeration value="PointCardRW"/>
+            <xsd:enumeration value="POSKeyboard"/>
+            <xsd:enumeration value="POSPower"/>                        
+            <xsd:enumeration value="POSPrinter"/>
+            <xsd:enumeration value="RemoteOrderDisplay"/>
+            <xsd:enumeration value="Scale"/>
+            <xsd:enumeration value="Scanner"/>
+            <xsd:enumeration value="SignatureCapture"/>
+            <xsd:enumeration value="ToneIndicator"/>                        
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="PropTypeType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="String"/>
+            <xsd:enumeration value="Boolean"/>
+            <xsd:enumeration value="Character"/>
+            <xsd:enumeration value="Integer"/>
+            <xsd:enumeration value="Long"/>
+            <xsd:enumeration value="Byte"/>
+            <xsd:enumeration value="Short"/>
+            <xsd:enumeration value="Double"/>
+            <xsd:enumeration value="Float"/>
+            <xsd:enumeration value="URI"/>            
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:simpleType name="VersionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="1.4a"/>
+            <xsd:enumeration value="1.5"/>
+            <xsd:enumeration value="1.6"/>
+            <xsd:enumeration value="1.7"/>            
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

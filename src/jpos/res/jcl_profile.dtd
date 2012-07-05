@@ -1,0 +1,51 @@
+<?xml encoding="UTF-8"?>
+
+<!-- Revision: 0 1.5 http://www.nrf-arts.com/JavaPOS/JCL/jcl_profile.dtd, docs, xerces, xerces1_1_1  -->
+
+<!ELEMENT Profile (ProfileInfo, JposEntryInfo*)>
+
+<!ELEMENT ProfileInfo EMPTY>
+
+<!ELEMENT JposEntryInfo (StandardProp*, RequiredProp*, OptionalProp*)>
+
+<!ELEMENT StandardProp (PropInfo)*>
+<!ELEMENT RequiredProp (PropInfo)*>
+<!ELEMENT OptionalProp (PropInfo)*>
+
+<!ELEMENT PropInfo (Tooltip?, PropValue+, PropViewer?)>
+<!ELEMENT PropValue (Tooltip?, Value+)>
+<!ELEMENT PropViewer (#PCDATA)>
+<!ELEMENT Tooltip (#PCDATA)>
+<!ELEMENT Value (#PCDATA)>
+
+<!ATTLIST Profile
+          name CDATA #REQUIRED>
+
+<!ATTLIST ProfileInfo
+          version CDATA #REQUIRED
+          vendorName CDATA #REQUIRED
+          vendorUrl CDATA #REQUIRED
+          description CDATA #IMPLIED>
+          
+<!ATTLIST JposEntryInfo
+          name CDATA #REQUIRED 
+          jposVersion CDATA #REQUIRED
+          deviceCategory ( BumpBar | CashChanger | CashDrawer | CAT | CoinDispenser | FiscalPrinter |
+                           HardTotals | Keylock | RemoteOrderDisplay | Scale | Scanner | SignatureCapture |
+                           ToneIndicator | LineDisplay | MICR | MSR | PinPad | POSKeyboard |
+                           POSPrinter | PointCardReaderWriter  ) #REQUIRED
+          imageFile CDATA #IMPLIED>
+
+<!ATTLIST PropInfo
+          name CDATA #REQUIRED>
+
+<!ATTLIST PropValue
+          type ( booleanValue | stringValue | integerValue | charValue | listValue ) #REQUIRED
+          choice ( one | multiple | fixed ) #IMPLIED
+          default CDATA #IMPLIED>
+          
+<!ATTLIST PropViewer
+          className CDATA #REQUIRED
+          tooltip CDATA #IMPLIED
+          propValueType ( booleanValue | stringValue | integerValue | 
+                          charValue | listValue ) #REQUIRED>

@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+
+<!-- XML Ant (http://jakarta.apache.org/ant/index.html) build file for JavaPOS -->
+<!-- @author Brian Spohn -->
+<!-- @version 1.13 -->
+
+<project name="JavaPOS" default="dist">
+
+  <!-- Global properties for this build -->
+  
+  <!-- Directory properties -->
+  <property name="jpos.root" value="."/>
+  <property name="jpos.src" value="${jpos.root}/src"/>
+  <property name="jpos.build" value="${jpos.root}/classes"/>
+  <property name="jpos.dist" value="${jpos.root}/dist"/>
+  <property name="jpos.extra" value="${jpos.root}/extra"/>
+  
+  <!-- Distribution file names -->
+  <property name="jpos.jar.file" value="${jpos.dist}/jpos113.jar"/>
+  <property name="jpos.controls.jar.file" value="${jpos.dist}/jpos113-controls.jar"/>
+  <property name="jpos.dist.zip.file" value="${jpos.dist}/JavaPOS-1.13.0-Dist.zip"/>
+  <property name="jpos.src.zip.file.base" value="${jpos.dist}/JavaPOS-1.13.0-Source"/>
+  
+  <!-- Tool: JposControlGen -->
+  <property name="jpos.tools.ctrlgen" value="JposControlGen"/>
+  <property name="jpos.tools.ctrlgen.version" value="1013000"/>
+  <property name="jpos.tools.ctrlgen.output" value="${jpos.src}/jpos"/>
+  
+  
+  <!-- Remove generated output so a full build will occur -->
+  <target name="clean">
+    <delete>
+      <fileset dir="${jpos.build}" includes="**/*.class"/>
+      <fileset dir="${jpos.dist}" includes="*.jar,*.zip"/>
+    </delete>
+  </target>
+  
+  <!-- Initialize environment for build -->
+  <target name="init">
+    <!-- Creates the time stamp -->
+    <tstamp/>
+
+    <!-- Make sure output directories are present -->
+    <mkdir dir="${jpos.build}"/>
+    <mkdir dir="${jpos.dist}"/>
+  </target>
+  
+  <!-- Generate JavaPOS Controls -->
+  <target name="genctrls">
+    <echo message="Creating JavaPOS Controls from JavaPOS Interfaces"/>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Belt"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="BillAcceptor"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="BillDispenser"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Biometrics"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="BumpBar"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CashChanger"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CashDrawer"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CheckScanner"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CoinAcceptor"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CoinDispenser"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="CAT"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="ElectronicJournal"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="ElectronicValueRW"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="FiscalPrinter"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Gate"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="HardTotals"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="ImageScanner"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="ItemDispenser"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Keylock"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Lights"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="LineDisplay"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="MICR"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="MotionSensor"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="MSR"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="PINPad"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="PointCardRW"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="POSKeyboard"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="POSPower"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="POSPrinter"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="RemoteOrderDisplay"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="RFIDScanner"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Scale"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="Scanner"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="SignatureCapture"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="SmartCardRW"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <java fork="yes" classname="${jpos.tools.ctrlgen}">
+      <arg value="ToneIndicator"/>
+      <arg value="${jpos.tools.ctrlgen.version}"/>
+      <arg value="${jpos.src}/jpos"/>
+      <arg value="${jpos.tools.ctrlgen.output}"/>
+    </java>
+    <copy todir="${jpos.src}/jpos">
+      <fileset dir="${jpos.tools.ctrlgen.output}" includes="*.java,*.stub"/>
+    </copy>
+  </target>
+  
+  <!-- Compile JavaPOS files -->
+  <target name="compile" depends="init,genctrls">
+    <echo message="Compiling JavaPOS classes"/>
+    <javac deprecation="on" srcdir="${jpos.src}" destdir="${jpos.build}"
+           includes="jpos/**"/>
+    
+    <!-- Copy manifest stubs from source to destination directories -->
+    <copy todir="${jpos.build}/jpos">
+      <fileset dir="${jpos.src}/jpos" includes="*.stub"/>
+    </copy>
+    
+    <!-- Copy manifest stubs from source to destination directories -->
+    <copy todir="${jpos.build}/jpos/res">
+      <fileset dir="${jpos.src}/jpos/res" includes="*.*"/>
+    </copy>
+    
+  </target>
+  
+  <!-- Create JavaPOS Distribution files -->
+  <target name="dist" depends="compile">
+    <echo message="Building JavaPOS JAR file"/>
+    <jar jarfile="${jpos.jar.file}" basedir="${jpos.build}" includes="**/*.*"/>
+         
+    <echo message="Building JavaPOS Controls JAR file"/>
+    <jar jarfile="${jpos.controls.jar.file}" basedir="${jpos.build}" includes="jpos/*.*,jpos/events/*.*,jpos/services/*.*"/>
+         
+    <echo message="Building JavaPOS Source ZIP file"/>
+    <zip zipfile="${jpos.src.zip.file.base}-${DSTAMP}.zip" basedir="${jpos.root}" includes="src/**/*.*,extra/**/*.*,build.xml"/>
+    
+    <echo message="Building JavaPOS Distribution ZIP file"/>
+    <delete file="${jpos.dist.zip.file}"/>
+    <zip zipfile="${jpos.dist.zip.file}" basedir="${jpos.extra}" includes="*.*"/>
+    <zip zipfile="${jpos.dist.zip.file}" update="true" basedir="${jpos.dist}" includes="*.jar"/>
+  </target>
+  
+  <target name="all" depends="compile,dist"/>
+</project>
